@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import styled from "styled-components";
-// import {ProductConsumer} from "../context";
+import {ProductConsumer} from "../context";
 import PropTypes from "prop-types";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
@@ -10,44 +10,52 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 library.add(faCartPlus);
 
 export default class Product extends Component {
-    state={
-      inCart: false,
-    }
-    render() {
-        const {id, title, img, price, inCart} = this.props.product;
-        return (
-            <ProductWrapper className="col-9 mx-auto col-md-6 col-lg-3 my-3">
-                <div className="card">
-                    <div 
-                        className="img-container p-5"
-                        onClick={console.log('12')}
-                    >
-                      <Link to="/details">
-                        <img 
-                          className="card-img-top"
-                          src={img}
-                          alt={title}
-                        />
-                      </Link>
-                      <button className="cart-btn" disabled={this.state.inCart}>
-                        {this.state.inCart 
-                          ? (<p className="text-capitalize mb-0" disabled>
-                              in cart
-                            </p>)
-                          : <FontAwesomeIcon icon={faCartPlus} />
-                        }
-                      </button>
-                    </div>
-                    <div className="card-footer d-flex justify-content-between">
-                        <p className="align-self-center mb-0">{title}</p>
-                        <h5 className="text-blue font-italic m-0">
-                          {price}&nbsp;$
-                        </h5>
-                    </div>
+  render() {
+    const {id, title, img, price, inCart} = this.props.product;
+    return (
+      <ProductWrapper className="col-9 mx-auto col-md-6 col-lg-3 my-3">
+          <div className="card">
+            <ProductConsumer>
+              { value => (
+                <div 
+                    className="img-container p-5"
+                    onClick ={ value.handelDetail.bind(null, id) }
+                >
+                  <Link to="/details">
+                    <img 
+                      className="card-img-top"
+                      src={img}
+                      alt={title}
+                    />
+                  </Link>
+                  <button 
+                    className="cart-btn" 
+                    disabled={inCart}
+                    onClick = { ()=>{
+                      value.addToCart(id);
+                      value.openModal(id);
+                    }}
+                  >
+                    {inCart 
+                      ? (<p className="text-capitalize mb-0" disabled>
+                          in cart
+                        </p>)
+                      : <FontAwesomeIcon icon={faCartPlus} />
+                    }
+                  </button>
                 </div>
-            </ProductWrapper>
-        )
-    }
+              )}
+            </ProductConsumer>
+            <div className="card-footer d-flex justify-content-between">
+                <p className="align-self-center mb-0">{title}</p>
+                <h5 className="text-blue font-italic m-0">
+                  {price}&nbsp;$
+                </h5>
+            </div>
+          </div>
+      </ProductWrapper>
+    )
+  }
 }
 
 Product.propTypes={
