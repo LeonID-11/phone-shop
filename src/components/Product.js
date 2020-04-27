@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import styled from "styled-components";
-import {ProductConsumer} from "../context";
+// import {ProductConsumer} from "../context";
 import PropTypes from "prop-types";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";

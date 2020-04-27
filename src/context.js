@@ -11,9 +11,6 @@ class ProductProvider extends Component {
     componentDidMount(){
         this.setProducts();
     }
-    componentDidUpdate(){
-        // this.setProducts();
-    }
     setProducts = () =>{
         let products = [];
         storeProducts.forEach(item=>{
@@ -27,8 +24,8 @@ class ProductProvider extends Component {
     handelDetails = ()=>{
 
     }
-    addToCart = () => {
-
+    addToCart = (id) => {
+        console.log(id);
     }
     render() {
         return (
