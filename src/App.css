@@ -13,6 +13,9 @@ body {
   background: var(--mainWhite) !important;
   color: var(--mainDark) !important;
 }
+#root{
+  overflow-x: hidden;
+}
 .text-title {
   font-family: sans-serif;
   font-style: italic;

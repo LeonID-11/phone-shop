@@ -21,7 +21,7 @@ export default class Navbar extends Component {
             <Link className="nav-link" to="/">Produkts</Link>
           </li>
         </ul>
-        <Link className="ml-auto" to="/card">
+        <Link className="ml-auto" to="/cart">
           <ButtonContainer>
             <span className="mr-2">
               <FontAwesomeIcon icon={faCartPlus} />
